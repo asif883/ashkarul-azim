@@ -52,12 +52,9 @@ export default function Hero() {
     <section ref={root} id="home" className="on-light relative flex min-h-[calc(100svh-4.5rem)] flex-col overflow-hidden bg-paper pb-8 pt-6 md:pt-8">
       <div className="wrap relative flex flex-1 flex-col">
         {/* metadata */}
-        <div className="label grid grid-cols-2 gap-x-6 gap-y-2 text-[0.66rem] text-mute md:grid-cols-5">
-          {heroMeta.map((m, i) => (
-            <span key={m} className={`h-meta ${i % 2 ? "h-meta-b" : "h-meta-a"} ${i === 4 ? "col-span-2 md:col-span-1" : ""} ${i === 0 ? "text-ink" : ""}`}>
-              {m}
-            </span>
-          ))}
+        <div className="label flex items-center justify-between gap-4 text-[0.66rem] text-mute">
+          <span className="h-meta h-meta-a">{heroMeta[1]}</span>
+          <span className="h-meta h-meta-b text-right">{heroMeta[2]}</span>
         </div>
 
         <div className="relative mt-6 flex flex-1 flex-col lg:mt-4 lg:block">
@@ -67,7 +64,6 @@ export default function Hero() {
               <div className="h-portrait-img absolute inset-0">
                 <Image src={images.hero} alt="Portrait of Md Ashkarul Azim" fill priority sizes="(min-width:1024px) 34vw, 62vw" className="object-cover object-top" />
               </div>
-              <div className="label absolute bottom-3 left-3 bg-ink px-2 py-1 text-[0.6rem] text-lime">QC Engineer</div>
             </div>
           </div>
 
@@ -89,10 +85,10 @@ export default function Hero() {
 
         {/* copy + CTA */}
         <div className="relative z-10 mt-8 grid items-end gap-8 lg:mt-2 lg:grid-cols-12">
-          <p className="h-copy max-w-md text-base leading-relaxed text-mute md:text-lg lg:col-span-4">
+          <p className="h-copy max-w-md text-base leading-relaxed text-mute md:text-lg lg:col-span-5">
             Dedicated to maintaining apparel quality standards through inspection, technical audits, production monitoring, and continuous improvement.
           </p>
-          <div className="flex flex-wrap gap-3 lg:col-span-5">
+          <div className="flex flex-wrap gap-3 lg:col-span-7">
             <span className="h-cta">
               <a
                 href="#expertise"
@@ -111,13 +107,6 @@ export default function Hero() {
               <Button href={profile.resume} variant="outline" external cursor="Resume">
                 Download Resume
               </Button>
-            </span>
-          </div>
-          <div className="label flex items-center gap-3 text-mute lg:col-span-3 lg:justify-end">
-            <span className="inline-block h-2 w-2 rounded-full bg-lime ring-1 ring-black/30" aria-hidden="true" />
-            Quality Control Engineer · V-Trust
-            <span className="hidden items-center gap-2 border-l border-line pl-3 sm:flex">
-              Scroll <ArrowDown size={14} className="animate-bounce" aria-hidden="true" />
             </span>
           </div>
         </div>
