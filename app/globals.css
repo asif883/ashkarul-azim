@@ -131,16 +131,12 @@ body {
 }
 
 a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible {
+button:focus-visible {
   outline: 2px solid var(--lime);
   outline-offset: 3px;
 }
 .on-light a:focus-visible,
-.on-light button:focus-visible,
-.on-light input:focus-visible,
-.on-light textarea:focus-visible {
+.on-light button:focus-visible {
   outline-color: #000;
 }
 
@@ -158,3 +154,5 @@ textarea:focus-visible {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* focus styles for inputs live on the inputs themselves (see Contact) */

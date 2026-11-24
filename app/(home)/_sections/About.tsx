@@ -17,9 +17,6 @@ export default function About() {
             <span>Quality Professional / Dhaka, Bangladesh</span>
             <span className="text-ink">(01)</span>
           </FadeUp>
-          <span aria-hidden="true" className="display pointer-events-none absolute -right-2 -top-10 hidden text-[9rem] text-lime [-webkit-text-stroke:2px_#111] lg:block">
-            AA
-          </span>
         </div>
 
         <div className="lg:col-span-6 lg:col-start-7 lg:pt-10">

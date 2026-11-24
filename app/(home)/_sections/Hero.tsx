@@ -7,7 +7,12 @@ import { heroMeta, images, profile } from "@/lib/data";
 import { Button } from "@/components/ui";
 import { scrollToHash } from "@/components/Providers";
 
-const lines = ["Ensuring", "Quality.", "Building", "Trust."];
+const lines = [
+  { text: "Ensuring", hl: false },
+  { text: "Quality.", hl: false },
+  { text: "Building", hl: false },
+  { text: "Trust.", hl: true },
+];
 
 export default function Hero() {
   const root = useRef<HTMLElement>(null);
@@ -69,14 +74,16 @@ export default function Hero() {
 
           {/* headline */}
           <h1 className="h-title display relative z-10 mt-6 lg:max-w-[75%]" aria-label="Ensuring quality. Building trust.">
-            {lines.map((line, li) => (
-              <span key={line} className="block overflow-hidden pb-[0.06em]" aria-hidden="true">
+            {lines.map((line) => (
+              <span key={line.text} className="block overflow-hidden pb-[0.06em]" aria-hidden="true">
                 <span className="hero-h block">
-                  {line.split("").map((c, i) => (
-                    <span key={i} className={`h-char inline-block ${li % 2 ? "text-ink" : ""} ${c === "." ? "text-lime [-webkit-text-stroke:0.03em_#111]" : ""}`}>
-                      {c}
-                    </span>
-                  ))}
+                  <span className={line.hl ? "hl-bg" : ""}>
+                    {line.text.split("").map((c, i) => (
+                      <span key={i} className="h-char inline-block">
+                        {c}
+                      </span>
+                    ))}
+                  </span>
                 </span>
               </span>
             ))}

@@ -56,7 +56,7 @@ export default function Contact() {
     }, 700);
   };
 
-  const field = "w-full border-0 border-b border-black/40 bg-transparent px-0 py-3 text-lg text-black placeholder:text-black/40 focus:border-black focus:outline-none focus-visible:outline-none";
+  const field = "w-full border-0 border-b border-black/40 bg-transparent px-0 py-3 text-lg text-black placeholder:text-black/40 transition-[border-color,box-shadow] duration-300 focus:border-black focus:shadow-[0_1px_0_0_#000] focus:outline-none! focus-visible:outline-none!";
 
   return (
     <section id="contact" data-cursor-dark className="on-light bg-paper py-24 text-black md:py-40">
