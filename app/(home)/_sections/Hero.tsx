@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { ArrowDown } from "lucide-react";
 import { gsap, prefersReduced } from "@/lib/gsap";
-import { heroMeta, images, profile } from "@/lib/data";
+import { heroHighlights, heroMeta, images, profile } from "@/lib/data";
 import { Button } from "@/components/ui";
 import { scrollToHash } from "@/components/Providers";
 
@@ -28,12 +28,13 @@ export default function Hero() {
           .from(".h-portrait", { clipPath: "inset(100% 0 0 0)", duration: 1.5, ease: "expo.inOut" }, "-=1.3")
           .from(".h-portrait-img", { scale: 1.3, duration: 1.8 }, "<")
           .from(".h-copy", { opacity: 0, y: 24, duration: 1 }, "-=0.8")
-          .from(".h-cta", { opacity: 0, y: 24, stagger: 0.1, duration: 0.9 }, "-=0.7");
+          .from(".h-cta", { opacity: 0, y: 24, stagger: 0.1, duration: 0.9 }, "-=0.7")
+          .from(".h-hi", { opacity: 0, y: 20, stagger: 0.1, duration: 0.8 }, "-=0.5");
       };
       gsap.set(".h-hl", { backgroundRepeat: "no-repeat", backgroundSize: "0% 100%" });
-      gsap.set(".h-char, .h-meta, .h-portrait, .h-copy, .h-cta", { visibility: "hidden" });
+      gsap.set(".h-char, .h-meta, .h-portrait, .h-copy, .h-cta, .h-hi", { visibility: "hidden" });
       function start() {
-        gsap.set(".h-char, .h-meta, .h-portrait, .h-copy, .h-cta", { visibility: "visible" });
+        gsap.set(".h-char, .h-meta, .h-portrait, .h-copy, .h-cta, .h-hi", { visibility: "visible" });
         intro();
       }
       start();
@@ -56,15 +57,14 @@ export default function Hero() {
         {/* metadata */}
         <div className="label flex items-center justify-between gap-4 text-[0.66rem] text-mute">
           <span className="h-meta h-meta-a">{heroMeta[1]}</span>
-          <span className="h-meta h-meta-b text-right">{heroMeta[2]}</span>
         </div>
 
         <div className="relative mt-6 flex flex-1 flex-col lg:mt-4 lg:block">
           {/* portrait */}
-          <div className="h-portrait-wrap relative z-0 ml-auto w-[62%] max-w-[300px] sm:max-w-[360px] lg:absolute lg:right-0 lg:top-0 lg:w-[34vw] lg:max-w-[560px]">
+          <div className="h-portrait-wrap relative z-0 ml-auto w-[62%] max-w-[300px] sm:max-w-[360px] lg:absolute lg:right-0 lg:top-0 lg:w-[30vw] lg:max-w-[520px]">
             <div className="h-portrait relative aspect-[4/5] w-full overflow-hidden bg-line">
               <div className="h-portrait-img absolute inset-0">
-                <Image src={images.hero} alt="Portrait of Md Ashkarul Azim" fill priority sizes="(min-width:1024px) 34vw, 62vw" className="object-cover object-top" />
+                <Image src={images.hero} alt="Portrait of Md Ashkarul Azim" fill priority sizes="(min-width:1024px) 30vw, 62vw" className="object-cover object-top" />
               </div>
             </div>
           </div>
@@ -102,7 +102,7 @@ export default function Hero() {
                 }}
                 className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full border border-ink bg-ink px-6 py-3.5 text-paper transition-colors duration-500 hover:text-black"
               >
-                <span className="absolute inset-0 translate-y-full rounded-full bg-lime transition-transform duration-500 group-hover:translate-y-0" />
+                <span className="absolute inset-0 translate-y-[110%] rounded-full bg-lime transition-transform duration-500 group-hover:translate-y-0" />
                 <span className="label relative">Explore My Expertise</span>
                 <ArrowDown size={16} className="relative transition-transform duration-500 group-hover:translate-y-1" aria-hidden="true" />
               </a>
@@ -114,6 +114,18 @@ export default function Hero() {
             </span>
           </div>
         </div>
+
+        {/* highlights */}
+        <ul className="relative z-10 mt-6 grid grid-cols-3 gap-3 border-t border-line pt-4 sm:gap-8">
+          {heroHighlights.map((h) => (
+            <li key={h.k} className="h-hi flex flex-col gap-1.5 sm:flex-row sm:items-center sm:gap-4">
+              <span className="display text-[clamp(1.25rem,2.6vw,2rem)] leading-none">
+                <span className="hl-bg">{h.k}</span>
+              </span>
+              <span className="label text-[0.6rem] leading-snug text-mute sm:text-[0.68rem]">{h.v}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

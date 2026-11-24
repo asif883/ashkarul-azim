@@ -25,7 +25,7 @@ export const images = {
 export const nav = [
   { label: "About", href: "#about" },
   { label: "Expertise", href: "#expertise" },
-  { label: "Experience", href: "#experience" },
+  { label: "Career", href: "#experience" },
   { label: "Achievements", href: "#achievements" },
   { label: "Education", href: "#education" },
   { label: "Contact", href: "#contact" },
@@ -125,3 +125,9 @@ export const skills = {
 };
 
 export const principles = ["Precision", "Compliance", "Accountability", "Collaboration", "Continuous Improvement"];
+
+export const heroHighlights = [
+  { k: "2025", v: "Best QC Inspector of the Year" },
+  { k: "No.1", v: "Inspector Ranking · 2026" },
+  { k: "LSS", v: "Lean Six Sigma Yellow Belt" },
+];

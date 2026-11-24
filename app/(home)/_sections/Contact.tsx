@@ -137,7 +137,7 @@ export default function Contact() {
                 disabled={status === "loading"}
                 className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full border border-black bg-black px-8 py-4 text-lime transition-opacity disabled:opacity-70"
               >
-                <span className="absolute inset-0 translate-y-full bg-lime transition-transform duration-500 group-hover:translate-y-0" />
+                <span className="absolute inset-0 translate-y-[110%] bg-lime transition-transform duration-500 group-hover:translate-y-0" />
                 <span className="label relative transition-colors duration-500 group-hover:text-black">{status === "loading" ? "Preparing…" : "Send Message"}</span>
                 <ArrowUpRight size={16} className="relative transition-all duration-500 group-hover:rotate-45 group-hover:text-black" aria-hidden="true" />
               </button>

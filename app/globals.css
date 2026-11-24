@@ -95,7 +95,7 @@ body {
 }
 @media (min-width: 1024px) {
   .hero-h {
-    font-size: clamp(6rem, 10.6vw, 13rem);
+    font-size: clamp(6rem, 9.4vw, 12rem);
   }
 }
 
@@ -163,7 +163,8 @@ button:focus-visible {
   .h-meta,
   .h-portrait,
   .h-copy,
-  .h-cta {
+  .h-cta,
+  .h-hi {
     visibility: hidden;
   }
   .h-hl {
@@ -171,3 +172,6 @@ button:focus-visible {
     background-size: 0% 100%;
   }
 }
+
+
+/* 404 page uses utilities from app/not-found.tsx */

@@ -90,7 +90,7 @@ export default function Navbar() {
               onClick={(e) => go(e, "#contact")}
               className="label group relative hidden overflow-hidden rounded-full border border-ink px-5 py-2.5 transition-colors duration-500 hover:text-black sm:inline-block"
             >
-              <span className="absolute inset-0 -z-0 translate-y-full bg-lime transition-transform duration-500 group-hover:translate-y-0" />
+              <span className="absolute inset-0 -z-0 translate-y-[110%] bg-lime transition-transform duration-500 group-hover:translate-y-0" />
               <span className="relative">Let’s Connect</span>
             </a>
             <button

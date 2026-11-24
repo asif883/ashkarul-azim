@@ -5,10 +5,12 @@ import { ArrowUpRight } from "lucide-react";
 import { gsap, prefersReduced, revealStart, mDur } from "@/lib/gsap";
 import { expertise } from "@/lib/data";
 import { FadeUp, SectionLabel, SplitWords } from "@/components/ui";
+import Lightbox from "@/components/Lightbox";
 
 export default function Expertise() {
   const root = useRef<HTMLElement>(null);
   const [open, setOpen] = useState<number | null>(0);
+  const [box, setBox] = useState<number | null>(null);
 
   useEffect(() => {
     if (prefersReduced() || !root.current) return;
@@ -70,7 +72,13 @@ export default function Expertise() {
                   </button>
 
                   {/* image — always visible */}
-                  <div className="ex-img relative mt-5 aspect-[16/9] w-full overflow-hidden bg-paper/10 md:col-start-3 md:row-span-2 md:row-start-1 md:mt-0 md:aspect-[4/3] md:w-[clamp(220px,24vw,420px)] md:transition-[width] md:duration-700 md:ease-[cubic-bezier(.7,0,.2,1)] md:group-hover/row:w-[clamp(260px,30vw,520px)]">
+                  <button
+                    type="button"
+                    onClick={() => setBox(i)}
+                    aria-label={`View larger photo: ${e.title}`}
+                    data-cursor="Zoom"
+                    className="ex-img relative mt-5 block aspect-[16/9] w-full overflow-hidden bg-paper/10 md:col-start-3 md:row-span-2 md:row-start-1 md:mt-0 md:aspect-[4/3] md:w-[clamp(220px,24vw,420px)] md:transition-[width] md:duration-700 md:ease-[cubic-bezier(.7,0,.2,1)] md:group-hover/row:w-[clamp(260px,30vw,520px)]"
+                  >
                     <Image
                       src={e.img}
                       alt={`${e.title} — field photography`}
@@ -79,7 +87,7 @@ export default function Expertise() {
                       className="object-cover md:grayscale-[40%] transition-[transform,filter] duration-700 group-hover/row:scale-105 group-hover/row:grayscale-0"
                     />
                     <span className="label absolute bottom-0 left-0 bg-lime px-2 py-1 text-[0.58rem] text-black">Field photography</span>
-                  </div>
+                  </button>
 
                   {/* skills — accordion on mobile, always open on desktop */}
                   <div
@@ -105,6 +113,7 @@ export default function Expertise() {
           <li className="h-px w-full bg-paper/20" aria-hidden="true" />
         </ul>
       </div>
+      <Lightbox items={expertise.map((e) => ({ src: e.img, alt: `${e.title} — field photography`, caption: e.title }))} index={box} onIndexChange={setBox} />
     </section>
   );
 }

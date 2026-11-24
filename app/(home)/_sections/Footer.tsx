@@ -21,7 +21,7 @@ export default function Footer() {
     <footer className="bg-dark text-paper">
       <div className="wrap pb-8 pt-24 md:pt-36">
         <div className="flex flex-col gap-10 border-b border-paper/15 pb-16 md:pb-24">
-          <a href={`mailto:${profile.email}`} className="group display block text-[clamp(3rem,13vw,14rem)] leading-[0.85] transition-colors duration-500 hover:text-lime" data-cursor="Email">
+          <a href="#contact" onClick={(e) => go(e, "#contact")} className="group display block text-[clamp(3rem,13vw,14rem)] leading-[0.85] transition-colors duration-500 hover:text-lime" data-cursor="Contact">
             Let’s <br className="sm:hidden" />
             Connect<span className="text-lime">.</span>
           </a>

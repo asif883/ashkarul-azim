@@ -186,7 +186,7 @@ export function Button({
       data-cursor={cursor}
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       {...(download ? { download: true } : {})}
-      className={`group relative inline-flex items-center gap-3 overflow-hidden rounded-full border px-6 py-3.5 transition-colors duration-500 before:absolute before:inset-0 before:-z-0 before:translate-y-full before:rounded-full before:transition-transform before:duration-500 before:ease-[cubic-bezier(.7,0,.2,1)] hover:before:translate-y-0 ${styles} ${className}`}
+      className={`group relative inline-flex items-center gap-3 overflow-hidden rounded-full border px-6 py-3.5 transition-colors duration-500 before:absolute before:inset-0 before:-z-0 before:translate-y-[110%] before:rounded-full before:transition-transform before:duration-500 before:ease-[cubic-bezier(.7,0,.2,1)] hover:before:translate-y-0 ${styles} ${className}`}
     >
       <span className="label relative z-10">{children}</span>
       <ArrowUpRight size={16} className="relative z-10 transition-transform duration-500 group-hover:rotate-45" aria-hidden="true" />
