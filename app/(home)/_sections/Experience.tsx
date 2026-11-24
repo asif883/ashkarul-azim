@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger, prefersReduced } from "@/lib/gsap";
+import { gsap, ScrollTrigger, prefersReduced, revealStart, mDur } from "@/lib/gsap";
 import { experience } from "@/lib/data";
 import { FadeUp, SectionLabel, SplitWords } from "@/components/ui";
 
@@ -14,11 +14,11 @@ export default function Experience() {
       gsap.utils.toArray<HTMLElement>(".tl-item").forEach((item) => {
         const dot = item.querySelector(".tl-dot");
         ScrollTrigger.create({ trigger: item, start: "top 62%", onEnter: () => dot?.classList.add("is-on"), onLeaveBack: () => dot?.classList.remove("is-on") });
-        const tl = gsap.timeline({ scrollTrigger: { trigger: item, start: "top 80%", once: true } });
-        tl.from(item.querySelector(".tl-dot"), { scale: 0, duration: 0.6, ease: "back.out(2)" })
-          .from(item.querySelector(".tl-date"), { yPercent: 100, duration: 1, ease: "expo.out" }, 0)
-          .from(item.querySelectorAll(".tl-fade"), { y: 30, opacity: 0, stagger: 0.08, duration: 0.9, ease: "power3.out" }, 0.15)
-          .from(item.querySelectorAll(".tl-pt"), { x: -16, opacity: 0, stagger: 0.05, duration: 0.7, ease: "power2.out" }, 0.4);
+        const tl = gsap.timeline({ scrollTrigger: { trigger: item, start: revealStart("top 80%"), once: true } });
+        tl.from(item.querySelector(".tl-dot"), { scale: 0, duration: mDur(0.6), ease: "back.out(2)" })
+          .from(item.querySelector(".tl-date"), { yPercent: 100, duration: mDur(1), ease: "expo.out" }, 0)
+          .from(item.querySelectorAll(".tl-fade"), { y: 30, opacity: 0, stagger: 0.08, duration: mDur(0.9), ease: "power3.out" }, 0.15)
+          .from(item.querySelectorAll(".tl-pt"), { x: -16, opacity: 0, stagger: 0.05, duration: mDur(0.7), ease: "power2.out" }, 0.4);
       });
     }, root);
     return () => ctx.revert();

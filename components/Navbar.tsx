@@ -33,9 +33,14 @@ export default function Navbar() {
   useEffect(() => {
     if (open) window.__lenis?.stop();
     else window.__lenis?.start();
+    // native scroll (touch devices) must be locked too while the full-screen menu is open
+    document.documentElement.style.overflow = open ? "hidden" : "";
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.documentElement.style.overflow = "";
+    };
   }, [open]);
 
   const go = (e: React.MouseEvent, href: string) => {
@@ -48,7 +53,7 @@ export default function Navbar() {
     <>
       <header
         className={`sticky top-0 z-50 border-b transition-[background-color,border-color,box-shadow] duration-500 ${
-          scrolled ? "border-line bg-paper/85 shadow-[0_8px_30px_-18px_rgba(0,0,0,.25)] backdrop-blur-md" : "border-line/70 bg-transparent"
+          scrolled ? "border-line bg-paper/95 md:bg-paper/85 shadow-[0_8px_30px_-18px_rgba(0,0,0,.25)] md:backdrop-blur-md" : "border-line/70 bg-transparent"
         }`}
       >
         <div className="wrap flex h-[72px] items-center justify-between gap-6">

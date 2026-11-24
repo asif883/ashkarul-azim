@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { gsap, ScrollTrigger, prefersReduced } from "@/lib/gsap";
+import { gsap, ScrollTrigger, prefersReduced, revealStart, mDur } from "@/lib/gsap";
 import { education } from "@/lib/data";
 import { SectionLabel, SplitWords } from "@/components/ui";
 
@@ -13,7 +13,7 @@ export default function Education() {
       gsap.fromTo(".ed-line", { scaleY: 0 }, { scaleY: 1, transformOrigin: "top", ease: "none", scrollTrigger: { trigger: ".ed-list", start: "top 60%", end: "bottom 60%", scrub: true } });
       gsap.utils.toArray<HTMLElement>(".ed-item").forEach((item) => {
         const year = item.querySelector(".ed-year");
-        gsap.from(item.querySelectorAll(".ed-fade"), { y: 30, opacity: 0, stagger: 0.1, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: item, start: "top 85%", once: true } });
+        gsap.from(item.querySelectorAll(".ed-fade"), { y: 30, opacity: 0, stagger: 0.1, duration: mDur(0.9), ease: "power3.out", scrollTrigger: { trigger: item, start: revealStart("top 85%"), once: true } });
         const marks = [year, item.querySelector(".ed-dot")];
         ScrollTrigger.create({ trigger: item, start: "top 62%", onEnter: () => marks.forEach((m) => m?.classList.add("is-on")), onLeaveBack: () => marks.forEach((m) => m?.classList.remove("is-on")) });
       });

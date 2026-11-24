@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { gsap, prefersReduced } from "@/lib/gsap";
+import { gsap, prefersReduced, revealStart, mDur } from "@/lib/gsap";
 import { FadeUp, Line, SectionLabel } from "@/components/ui";
 
 const statement = "QUALITY IS MORE THAN INSPECTION. IT IS A COMMITMENT TO *CONSISTENCY,* *COMPLIANCE* AND *CONTINUOUS IMPROVEMENT.*";
@@ -20,7 +20,7 @@ export default function Intro() {
         { opacity: 0.14 },
         { opacity: 1, stagger: 0.1, ease: "none", scrollTrigger: { trigger: ".intro-statement", start: "top 80%", end: "bottom 45%", scrub: true } },
       );
-      gsap.from(".intro-up", { y: 50, opacity: 0, duration: 1.1, ease: "power3.out", scrollTrigger: { trigger: ".intro-up", start: "top 90%", once: true } });
+      gsap.from(".intro-up", { y: 50, opacity: 0, duration: mDur(1.1), ease: "power3.out", scrollTrigger: { trigger: ".intro-up", start: revealStart("top 90%"), once: true } });
     }, root);
     return () => ctx.revert();
   }, []);

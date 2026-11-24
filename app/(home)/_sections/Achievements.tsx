@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { Award } from "lucide-react";
-import { gsap, prefersReduced } from "@/lib/gsap";
+import { gsap, prefersReduced, revealStart, mDur } from "@/lib/gsap";
 import { certifications } from "@/lib/data";
 import { FadeUp, Line, SectionLabel, SplitWords } from "@/components/ui";
 
@@ -11,10 +11,10 @@ export default function Achievements() {
   useEffect(() => {
     if (prefersReduced() || !root.current) return;
     const ctx = gsap.context(() => {
-      gsap.from(".ac-big", { yPercent: 110, duration: 1.4, ease: "expo.out", stagger: 0.15, scrollTrigger: { trigger: ".ac-feature", start: "top 75%", once: true } });
+      gsap.from(".ac-big", { yPercent: 110, duration: mDur(1.4), ease: "expo.out", stagger: 0.15, scrollTrigger: { trigger: ".ac-feature", start: revealStart("top 75%"), once: true } });
       gsap.to(".ac-bg-a", { yPercent: -25, ease: "none", scrollTrigger: { trigger: root.current, start: "top bottom", end: "bottom top", scrub: true } });
       gsap.to(".ac-bg-b", { yPercent: 18, xPercent: -6, ease: "none", scrollTrigger: { trigger: root.current, start: "top bottom", end: "bottom top", scrub: true } });
-      gsap.from(".ac-cert", { x: -30, opacity: 0, stagger: 0.12, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: ".ac-certs", start: "top 80%", once: true } });
+      gsap.from(".ac-cert", { x: -30, opacity: 0, stagger: 0.12, duration: mDur(0.9), ease: "power3.out", scrollTrigger: { trigger: ".ac-certs", start: revealStart("top 80%"), once: true } });
     }, root);
     return () => ctx.revert();
   }, []);
@@ -24,7 +24,7 @@ export default function Achievements() {
       <span aria-hidden="true" className="ac-bg-a display pointer-events-none absolute -left-10 top-[18%] select-none text-[38vw] leading-none text-paper/[0.03]">
         01
       </span>
-      <span aria-hidden="true" className="ac-bg-b pointer-events-none absolute -right-40 top-[40%] h-[40rem] w-[40rem] rounded-full bg-lime/10 blur-3xl" />
+      <span aria-hidden="true" className="ac-bg-b pointer-events-none absolute -right-40 top-[40%] hidden md:block h-[40rem] w-[40rem] rounded-full bg-lime/10 blur-3xl" />
 
       <div className="wrap relative">
         <SectionLabel n="05" dark>

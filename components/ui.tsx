@@ -2,7 +2,7 @@
 import { useEffect, useRef, type ElementType } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { gsap, prefersReduced } from "@/lib/gsap";
+import { gsap, prefersReduced, revealStart, mDur } from "@/lib/gsap";
 
 /** Parses "*word*" markers into highlighted tokens. */
 function tokens(text: string) {
@@ -31,11 +31,11 @@ export function SplitWords({ text, as = "h2", className = "", hl = "text", stagg
     const ctx = gsap.context(() => {
       gsap.from(ref.current!.querySelectorAll(".mask > span"), {
         yPercent: 115,
-        duration: 1,
+        duration: mDur(1),
         ease: "expo.out",
         stagger,
         delay,
-        scrollTrigger: { trigger: ref.current, start: "top 88%", once: true },
+        scrollTrigger: { trigger: ref.current, start: revealStart("top 88%"), once: true },
       });
     }, ref);
     return () => ctx.revert();
@@ -65,10 +65,10 @@ export function FadeUp({ children, className = "", delay = 0, y = 40, as = "div"
       gsap.from(ref.current!, {
         y,
         opacity: 0,
-        duration: 1,
+        duration: mDur(1),
         delay,
         ease: "power3.out",
-        scrollTrigger: { trigger: ref.current, start: "top 90%", once: true },
+        scrollTrigger: { trigger: ref.current, start: revealStart("top 90%"), once: true },
       });
     });
     return () => ctx.revert();
@@ -90,9 +90,9 @@ export function Line({ className = "", dark = false }: { className?: string; dar
       gsap.from(ref.current!, {
         scaleX: 0,
         transformOrigin: "left center",
-        duration: 1.4,
+        duration: mDur(1.4),
         ease: "expo.out",
-        scrollTrigger: { trigger: ref.current, start: "top 95%", once: true },
+        scrollTrigger: { trigger: ref.current, start: revealStart("top 95%"), once: true },
       });
     });
     return () => ctx.revert();
@@ -125,17 +125,17 @@ export function RevealImage({
     const ctx = gsap.context(() => {
       gsap.from(wrap.current!, {
         clipPath: "inset(100% 0 0 0)",
-        duration: 1.4,
+        duration: mDur(1.4),
         ease: "expo.inOut",
-        scrollTrigger: { trigger: wrap.current, start: "top 85%", once: true },
+        scrollTrigger: { trigger: wrap.current, start: revealStart("top 85%"), once: true },
       });
       gsap.from(inner.current!, {
         scale: 1.35,
-        duration: 1.8,
+        duration: mDur(1.8),
         ease: "expo.out",
-        scrollTrigger: { trigger: wrap.current, start: "top 85%", once: true },
+        scrollTrigger: { trigger: wrap.current, start: revealStart("top 85%"), once: true },
       });
-      if (parallax && window.matchMedia("(min-width: 768px)").matches) {
+      if (parallax && true) {
         gsap.fromTo(
           inner.current!.firstElementChild,
           { yPercent: -7 },

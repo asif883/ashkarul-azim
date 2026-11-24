@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { gsap, prefersReduced } from "@/lib/gsap";
+import { gsap, prefersReduced, revealStart, mDur } from "@/lib/gsap";
 import { expertise } from "@/lib/data";
 import { FadeUp, SectionLabel, SplitWords } from "@/components/ui";
 
@@ -14,11 +14,11 @@ export default function Expertise() {
     if (prefersReduced() || !root.current) return;
     const ctx = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>(".ex-row").forEach((row) => {
-        const tl = gsap.timeline({ scrollTrigger: { trigger: row, start: "top 88%", once: true } });
-        tl.from(row.querySelector(".ex-line"), { scaleX: 0, transformOrigin: "left", duration: 1.2, ease: "expo.out" })
-          .from(row.querySelector(".ex-n"), { yPercent: 120, duration: 0.8, ease: "expo.out" }, 0.1)
-          .from(row.querySelector(".ex-title"), { yPercent: 110, duration: 1, ease: "expo.out" }, 0.15)
-          .from(row.querySelector(".ex-img"), { clipPath: "inset(0 0 100% 0)", duration: 1.2, ease: "expo.inOut" }, 0.2);
+        const tl = gsap.timeline({ scrollTrigger: { trigger: row, start: revealStart("top 88%"), once: true } });
+        tl.from(row.querySelector(".ex-line"), { scaleX: 0, transformOrigin: "left", duration: mDur(1.2), ease: "expo.out" })
+          .from(row.querySelector(".ex-n"), { yPercent: 120, duration: mDur(0.8), ease: "expo.out" }, 0.1)
+          .from(row.querySelector(".ex-title"), { yPercent: 110, duration: mDur(1), ease: "expo.out" }, 0.15)
+          .from(row.querySelector(".ex-img"), { clipPath: "inset(0 0 100% 0)", duration: mDur(1.2), ease: "expo.inOut" }, 0.2);
       });
     }, root);
     return () => ctx.revert();
@@ -76,7 +76,7 @@ export default function Expertise() {
                       alt={`${e.title} — field photography`}
                       fill
                       sizes="(min-width:768px) 30vw, 100vw"
-                      className="object-cover grayscale-[40%] transition-[transform,filter] duration-700 group-hover/row:scale-105 group-hover/row:grayscale-0"
+                      className="object-cover md:grayscale-[40%] transition-[transform,filter] duration-700 group-hover/row:scale-105 group-hover/row:grayscale-0"
                     />
                     <span className="label absolute bottom-0 left-0 bg-lime px-2 py-1 text-[0.58rem] text-black">Field photography</span>
                   </div>

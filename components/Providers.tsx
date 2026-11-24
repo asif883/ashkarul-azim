@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import Lenis from "lenis";
-import { gsap, ScrollTrigger, prefersReduced } from "@/lib/gsap";
+import { gsap, ScrollTrigger, prefersReduced, isDesktop } from "@/lib/gsap";
 
 declare global {
   interface Window {
@@ -11,7 +11,8 @@ declare global {
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   useEffect(() => {
-    if (prefersReduced()) return;
+    // Native scrolling on touch devices: JS smooth-scroll fights the browser and feels laggy there
+    if (prefersReduced() || !isDesktop()) return;
     const lenis = new Lenis({ duration: 1.15, smoothWheel: true });
     window.__lenis = lenis;
     lenis.on("scroll", ScrollTrigger.update);
@@ -32,5 +33,5 @@ export function scrollToHash(href: string) {
   const el = document.querySelector(href);
   if (!el) return;
   if (window.__lenis) window.__lenis.scrollTo(el as HTMLElement, { offset: -60, duration: 1.4 });
-  else el.scrollIntoView({ behavior: "smooth" });
+  else window.scrollTo({ top: (el as HTMLElement).getBoundingClientRect().top + window.scrollY - 64, behavior: "smooth" });
 }

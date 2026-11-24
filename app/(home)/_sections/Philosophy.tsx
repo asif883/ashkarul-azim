@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef } from "react";
-import { gsap, prefersReduced } from "@/lib/gsap";
+import { gsap, prefersReduced, revealStart, mDur } from "@/lib/gsap";
 import { principles } from "@/lib/data";
 import { FadeUp, Line, SectionLabel, SplitWords } from "@/components/ui";
 
@@ -10,7 +10,7 @@ export default function Philosophy() {
     if (prefersReduced() || !root.current) return;
     const ctx = gsap.context(() => {
       gsap.to(".ph-marquee", { xPercent: -30, ease: "none", scrollTrigger: { trigger: root.current, start: "top bottom", end: "bottom top", scrub: 0.6 } });
-      gsap.from(".ph-p", { yPercent: 100, stagger: 0.1, duration: 1.1, ease: "expo.out", scrollTrigger: { trigger: ".ph-list", start: "top 80%", once: true } });
+      gsap.from(".ph-p", { yPercent: 100, stagger: 0.1, duration: mDur(1.1), ease: "expo.out", scrollTrigger: { trigger: ".ph-list", start: revealStart("top 80%"), once: true } });
     }, root);
     return () => ctx.revert();
   }, []);
