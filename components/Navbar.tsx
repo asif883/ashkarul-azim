@@ -32,7 +32,7 @@ export default function Navbar() {
 
   useEffect(() => {
     if (open) window.__lenis?.stop();
-    else if (document.documentElement.dataset.loaded === "1") window.__lenis?.start();
+    else window.__lenis?.start();
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -80,13 +80,6 @@ export default function Navbar() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <span className="label hidden items-center gap-2 text-mute xl:flex">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime opacity-90" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-lime ring-1 ring-black/30" />
-              </span>
-              Open to connect
-            </span>
             <a
               href="#contact"
               onClick={(e) => go(e, "#contact")}

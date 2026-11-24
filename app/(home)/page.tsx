@@ -1,6 +1,6 @@
 import Providers from "@/components/Providers";
-import Preloader from "@/components/Preloader";
 import Cursor from "@/components/Cursor";
+import BackToTop from "@/components/BackToTop";
 import Navbar from "@/components/Navbar";
 import Hero from "./_sections/Hero";
 import Intro from "./_sections/Intro";
@@ -18,7 +18,6 @@ import Footer from "./_sections/Footer";
 export default function Home() {
   return (
     <Providers>
-      <Preloader />
       <Cursor />
       <a href="#home" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:bg-lime focus:px-4 focus:py-2">
         Skip to content
@@ -38,6 +37,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <BackToTop />
     </Providers>
   );
 }

@@ -18,12 +18,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
     const tick = (t: number) => lenis.raf(t * 1000);
     gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
-    // Preloader holds scrolling until it exits
-    if (document.documentElement.dataset.loaded !== "1") lenis.stop();
-    const onLoaded = () => lenis.start();
-    window.addEventListener("preloaded", onLoaded);
     return () => {
-      window.removeEventListener("preloaded", onLoaded);
       gsap.ticker.remove(tick);
       lenis.destroy();
       window.__lenis = undefined;

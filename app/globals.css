@@ -156,3 +156,18 @@ button:focus-visible {
 }
 
 /* focus styles for inputs live on the inputs themselves (see Contact) */
+
+/* Hero intro: hide before the animation starts (avoids a flash of unstyled content) */
+@media (prefers-reduced-motion: no-preference) {
+  .h-char,
+  .h-meta,
+  .h-portrait,
+  .h-copy,
+  .h-cta {
+    visibility: hidden;
+  }
+  .h-hl {
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+  }
+}

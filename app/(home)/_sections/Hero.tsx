@@ -19,26 +19,24 @@ export default function Hero() {
 
   useEffect(() => {
     if (prefersReduced()) return;
-    let startFn: (() => void) | undefined;
-    const onLoaded = () => startFn && ctx.add(startFn);
     const ctx = gsap.context(() => {
       const intro = () => {
         const tl = gsap.timeline({ defaults: { ease: "expo.out" } });
         tl.from(".h-meta", { opacity: 0, y: 14, stagger: 0.08, duration: 0.9 })
           .from(".h-char", { yPercent: 120, duration: 1.2, stagger: { each: 0.025, from: "start" } }, "-=0.5")
+          .to(".h-hl", { backgroundSize: "100% 100%", duration: 0.9, ease: "expo.out" }, ">-0.5")
           .from(".h-portrait", { clipPath: "inset(100% 0 0 0)", duration: 1.5, ease: "expo.inOut" }, "-=1.3")
           .from(".h-portrait-img", { scale: 1.3, duration: 1.8 }, "<")
           .from(".h-copy", { opacity: 0, y: 24, duration: 1 }, "-=0.8")
           .from(".h-cta", { opacity: 0, y: 24, stagger: 0.1, duration: 0.9 }, "-=0.7");
       };
+      gsap.set(".h-hl", { backgroundRepeat: "no-repeat", backgroundSize: "0% 100%" });
       gsap.set(".h-char, .h-meta, .h-portrait, .h-copy, .h-cta", { visibility: "hidden" });
       function start() {
         gsap.set(".h-char, .h-meta, .h-portrait, .h-copy, .h-cta", { visibility: "visible" });
         intro();
       }
-      startFn = start;
-      if (document.documentElement.dataset.loaded === "1") start();
-      else window.addEventListener("preloaded", onLoaded, { once: true });
+      start();
 
       // scroll interactions
       const st = { trigger: root.current, start: "top top", end: "bottom top", scrub: true };
@@ -48,7 +46,6 @@ export default function Hero() {
       gsap.to(".h-meta-b", { y: -120, ease: "none", scrollTrigger: st });
     }, root);
     return () => {
-      window.removeEventListener("preloaded", onLoaded);
       ctx.revert();
     };
   }, []);
@@ -77,7 +74,7 @@ export default function Hero() {
             {lines.map((line) => (
               <span key={line.text} className="block overflow-hidden pb-[0.06em]" aria-hidden="true">
                 <span className="hero-h block">
-                  <span className={line.hl ? "hl-bg" : ""}>
+                  <span className={line.hl ? "hl-bg h-hl" : ""}>
                     {line.text.split("").map((c, i) => (
                       <span key={i} className="h-char inline-block">
                         {c}
